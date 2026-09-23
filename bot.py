@@ -67,9 +67,7 @@ def init_db():
     """)
     if not c.execute("SELECT 1 FROM campaigns WHERE status='active'").fetchone():
         c.execute(
-            "INSERT INTO campaigns(name,reward,target,status,created_at) VALUES(?,?,?,?,?)",
-            ("Campanha Inicial", 5.00, 2, "active", now())
-        )
+            "INSERT INTO users(telegram_id,username,name,created_at) VALUES(?,?,?,?)",
     c.commit()
     c.close()
 
