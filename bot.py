@@ -66,11 +66,12 @@ def init_db():
     );
     """)
     if not c.execute("SELECT 1 FROM campaigns WHERE status='active'").fetchone():
-        c.execute(
-            "INSERT INTO users(telegram_id,username,name,created_at) VALUES(?,?,?,?)",
+    c.execute(
+        "INSERT INTO campaigns(name,reward,target,status,created_at) VALUES(?,?,?,?,?)",
+        ("Campanha Inicial", 5.00, 2, "active", now())
+    )
     c.commit()
     c.close()
-
 def get_user(tg):
     c = db()
     u = c.execute("SELECT * FROM users WHERE telegram_id=?", (tg.id,)).fetchone()
